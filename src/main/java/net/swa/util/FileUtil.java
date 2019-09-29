@@ -1,14 +1,9 @@
 package net.swa.util;
 
-import com.thoughtworks.xstream.core.util.Base64Encoder;
-
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
-import java.io.BufferedInputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
-import java.net.URL;
 
 public class FileUtil {
     public static String getExtension(File f) {
@@ -66,17 +61,4 @@ public class FileUtil {
         System.out.println(getExtension("flowers.png"));
     }
 
-    public static String imageToBase64(String path)
-            throws Exception {
-        URL url = new URL(path);
-        BufferedInputStream in = new BufferedInputStream(url.openStream());
-        ByteArrayOutputStream out = new ByteArrayOutputStream();
-        byte[] buffer = new byte['Ȁ'];
-        while (in.read(buffer) != -1) {
-            out.write(buffer);
-        }
-        Base64Encoder e = new Base64Encoder();
-        byte[] data = out.toByteArray();
-        return e.encode(data);
-    }
 }

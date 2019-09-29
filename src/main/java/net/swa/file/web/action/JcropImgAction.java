@@ -1,12 +1,12 @@
 package net.swa.file.web.action;
 
+import lombok.extern.slf4j.Slf4j;
 import net.swa.file.beans.entity.Attachment;
 import net.swa.system.service.ICommonService;
 import net.swa.system.web.action.AbstractBaseAction;
 import net.swa.util.ConfigUtil;
 import net.swa.util.FileUtil;
 import net.swa.util.JsonResult;
-import org.apache.log4j.Logger;
 import org.jsoup.helper.StringUtil;
 import org.springframework.beans.factory.annotation.Required;
 import org.springframework.stereotype.Controller;
@@ -25,12 +25,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+@Slf4j
 @Controller
 @RequestMapping({"/jcrop"})
 public class JcropImgAction
         extends AbstractBaseAction {
     private static final long serialVersionUID = -3566256767528230895L;
-    private Logger log = Logger.getLogger(JcropImgAction.class);
     private ICommonService commonService;
     private String uploadPath;
     private String gabagePath;

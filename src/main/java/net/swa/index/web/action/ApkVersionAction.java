@@ -1,9 +1,9 @@
 package net.swa.index.web.action;
 
+import lombok.extern.slf4j.Slf4j;
 import net.swa.index.beans.entity.ApkVersion;
 import net.swa.index.service.ApkVersionService;
 import net.swa.system.web.action.AbstractBaseAction;
-import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Required;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -17,10 +17,10 @@ import java.util.Map;
 
 @Controller
 @RequestMapping({"/version"})
+@Slf4j
 public class ApkVersionAction
         extends AbstractBaseAction {
     private static final long serialVersionUID = -1541842392065452147L;
-    private final Logger log = Logger.getLogger(ApkVersionAction.class);
     private ApkVersionService apkVersionService;
 
     @RequestMapping({"/index"})

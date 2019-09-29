@@ -3,7 +3,7 @@ package net.swa.system.web.action;
 import net.swa.system.beans.entity.Menu;
 import net.swa.system.service.ICommonService;
 import net.swa.system.service.IMenuService;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Required;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;

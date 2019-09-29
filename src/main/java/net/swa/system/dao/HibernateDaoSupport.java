@@ -2,35 +2,40 @@ package net.swa.system.dao;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.springframework.beans.factory.annotation.Required;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 
-import javax.annotation.Resource;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.PersistenceContext;
 
 public class HibernateDaoSupport {
-    private SessionFactory sessionFactory;
+
+    @Autowired
+    private EntityManagerFactory entityManagerFactory;
+
+    @PersistenceContext
+    protected EntityManager em;
 
     protected Session getCurrentSession() {
-        if (this.sessionFactory == null) {
-            return null;
-        }
-        return this.sessionFactory.getCurrentSession();
-    }
-
-    protected Session getOpenSession() {
-        if (this.sessionFactory == null) {
-            return null;
-        }
-        Session session = this.sessionFactory.openSession();
+        Session session = em.unwrap(Session.class);
         return session;
     }
+//
+//    @Transactional
+//    protected Session getCurrentSession() {
+//        Session ss = entityManagerFactory.unwrap(SessionFactory.class).getCurrentSession();
+//        return ss;
+//    }
 
-    public SessionFactory getSessionFactory() {
-        return this.sessionFactory;
-    }
 
-    @Required
-    @Resource(name = "sessionFactory")
-    public void setSessionFactory(SessionFactory sessionFactory) {
-        this.sessionFactory = sessionFactory;
+    /**
+     * 获取session
+     */
+    @Transactional
+    protected Session getOpenSession() {
+        return entityManagerFactory.unwrap(SessionFactory.class).openSession();//这种方式需要手动关闭session
+        // 这种方式会自动关闭session，但是要配置current_session_context_class，并且需要使用事务
+        //return entityManagerFactory.unwrap(SessionFactory.class).getCurrentSession();
     }
 }

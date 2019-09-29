@@ -4,7 +4,7 @@ import net.swa.system.beans.entity.Dict;
 import net.swa.system.service.ICommonService;
 import net.swa.system.service.IDictService;
 import net.swa.util.JsonResult;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Required;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;

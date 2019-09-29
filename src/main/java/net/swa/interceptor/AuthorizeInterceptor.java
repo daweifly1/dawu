@@ -1,18 +1,17 @@
 package net.swa.interceptor;
 
+import lombok.extern.slf4j.Slf4j;
 import net.swa.system.beans.entity.OperationLog;
 import net.swa.system.beans.entity.User;
 import net.swa.system.service.ICommonService;
 import net.swa.system.util.annotation.Log;
 import net.swa.util.DateUtils;
 import net.swa.util.http.HttpServletUtil;
-import org.apache.commons.lang.StringUtils;
-import org.apache.log4j.Logger;
-import org.springframework.beans.factory.annotation.Required;
+import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
-import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.lang.reflect.Method;
@@ -20,12 +19,12 @@ import java.net.URLEncoder;
 import java.util.Iterator;
 import java.util.List;
 
-public class AuthorizeInterceptor
-        extends HandlerInterceptorAdapter {
-    private final Logger log = Logger.getLogger(AuthorizeInterceptor.class);
+@Slf4j
+public class AuthorizeInterceptor extends HandlerInterceptorAdapter {
     private List<String> includeAdmURLs;
     private List<String> includeFrontURLs;
     private List<String> exludeURLs;
+    @Autowired
     private ICommonService commonService;
 
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
@@ -116,16 +115,6 @@ public class AuthorizeInterceptor
             this.commonService.commonAdd(oLog);
         }
         super.afterCompletion(request, response, handler, ex);
-    }
-
-    public ICommonService getCommonService() {
-        return this.commonService;
-    }
-
-    @Required
-    @Resource(name = "commonService")
-    public void setCommonService(ICommonService commonService) {
-        this.commonService = commonService;
     }
 
     public void setIncludeAdmURLs(List<String> includeAdmURLs) {

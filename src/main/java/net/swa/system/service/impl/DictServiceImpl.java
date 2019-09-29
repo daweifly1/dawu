@@ -4,7 +4,7 @@ import net.swa.system.beans.entity.Dict;
 import net.swa.system.dao.HibernateDaoSupport;
 import net.swa.system.service.IDictService;
 import net.swa.util.JsonResult;
-import org.hibernate.Query;
+import org.hibernate.query.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.springframework.stereotype.Service;

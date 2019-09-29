@@ -1,7 +1,7 @@
 package net.swa.index.web.action;
 
+import lombok.extern.slf4j.Slf4j;
 import net.swa.system.web.action.AbstractBaseAction;
-import org.apache.log4j.Logger;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -9,10 +9,10 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 
+@Slf4j
 public abstract class AbstractBaseIndexAction
         extends AbstractBaseAction {
     private static final long serialVersionUID = 3625388438776145908L;
-    private final Logger log = Logger.getLogger(AbstractBaseIndexAction.class);
 
     protected void addCookie(HttpServletResponse resp, String name, String value) {
         try {

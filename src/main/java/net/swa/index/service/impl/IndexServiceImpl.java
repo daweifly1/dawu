@@ -1,5 +1,6 @@
 package net.swa.index.service.impl;
 
+import lombok.extern.slf4j.Slf4j;
 import net.swa.index.beans.entity.BackDbHis;
 import net.swa.index.beans.entity.Deductions;
 import net.swa.index.beans.entity.GymLog;
@@ -12,10 +13,9 @@ import net.swa.util.ConfigUtil;
 import net.swa.util.Const;
 import net.swa.util.DateUtils;
 import net.swa.util.EncryptTool;
-import org.apache.commons.lang.StringUtils;
-import org.apache.log4j.Logger;
-import org.hibernate.Query;
+import org.apache.commons.lang3.StringUtils;
 import org.hibernate.Session;
+import org.hibernate.query.Query;
 import org.springframework.stereotype.Service;
 
 import java.io.File;
@@ -24,11 +24,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+@Slf4j
 @Service("indexService")
 public class IndexServiceImpl
         extends HibernateDaoSupport
         implements IndexService {
-    private final Logger log = Logger.getLogger(IndexServiceImpl.class);
 
     public Map<String, Object> login(String loginName, String password, String mac, String type) {
         Map<String, Object> map = new HashMap();

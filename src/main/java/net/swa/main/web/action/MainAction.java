@@ -1,5 +1,6 @@
 package net.swa.main.web.action;
 
+import lombok.extern.slf4j.Slf4j;
 import net.swa.system.beans.entity.Menu;
 import net.swa.system.beans.entity.User;
 import net.swa.system.service.ICommonService;
@@ -7,7 +8,6 @@ import net.swa.system.service.IMenuService;
 import net.swa.system.web.action.AbstractBaseAction;
 import net.swa.util.EncryptTool;
 import net.swa.util.JsonResult;
-import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Required;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -22,11 +22,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+@Slf4j
 @Controller
 public class MainAction
         extends AbstractBaseAction {
     private static final long serialVersionUID = -8445520563685861470L;
-    private static final Logger log = Logger.getLogger(MainAction.class);
     private ICommonService commonService;
     private IMenuService menuService;
 

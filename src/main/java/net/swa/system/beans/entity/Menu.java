@@ -1,5 +1,6 @@
 package net.swa.system.beans.entity;
 
+import com.alibaba.fastjson.annotation.JSONField;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.Column;
@@ -19,6 +20,7 @@ public class Menu
         implements Comparable<Menu> {
     private Long id;
     private String title;
+    @JSONField(serialize = false)
     private Menu parent;
     private String event;
     private int weight;

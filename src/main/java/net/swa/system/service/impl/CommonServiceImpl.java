@@ -3,9 +3,10 @@ package net.swa.system.service.impl;
 import net.swa.system.dao.HibernateDaoSupport;
 import net.swa.system.service.ICommonService;
 import net.swa.util.JsonResult;
-import org.apache.commons.lang.StringUtils;
-import org.hibernate.Query;
+import org.apache.commons.lang3.StringUtils;
+import org.hibernate.query.Query;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.Id;
 import java.lang.reflect.Method;
@@ -16,6 +17,7 @@ import java.util.List;
 public class CommonServiceImpl
         extends HibernateDaoSupport
         implements ICommonService {
+    @Transactional
     public <T> JsonResult<T> search(String[] attrNames, Object[] attrValues, String[] operators, Class<T> type, int currentPage, int pageSize, String orderBy, String orderType)
             throws Exception {
         JsonResult<T> json = new JsonResult();
@@ -101,6 +103,7 @@ public class CommonServiceImpl
         return json;
     }
 
+    @Transactional
     public <T> T findByAttribute(Class<T> type, String attrName, Object val) {
         Query query = getCurrentSession()
                 .createQuery(
@@ -114,6 +117,7 @@ public class CommonServiceImpl
         return null;
     }
 
+    @Transactional
     public <T> List<T> search(String attr, Object value, Class<T> type, Integer count, String orderBy, String orderType) {
         List<T> list = new ArrayList();
         String hql = "from " + type.getSimpleName();
@@ -141,6 +145,7 @@ public class CommonServiceImpl
         return list;
     }
 
+    @Transactional
     public boolean commonUpdateStatus(String type, Long[] ids, int status)
             throws Exception {
         for (int i = 0; i < ids.length; i++) {
@@ -153,6 +158,7 @@ public class CommonServiceImpl
         return true;
     }
 
+    @Transactional
     public boolean commonDelete(String type, Long... ids)
             throws Exception {
         for (int i = 0; i < ids.length; i++) {
@@ -167,6 +173,7 @@ public class CommonServiceImpl
         return true;
     }
 
+    @Transactional
     public boolean commonDelHisStatus(String type, String stateName, Long[] ids, String status)
             throws Exception {
         for (int i = 0; i < ids.length; i++) {
@@ -180,6 +187,7 @@ public class CommonServiceImpl
         return true;
     }
 
+    @Transactional
     public void commonAdd(Object obj) {
         Long id = (Long) getCurrentSession().save(obj);
         Class<? extends Object> clz = obj.getClass();
@@ -203,31 +211,36 @@ public class CommonServiceImpl
         }
     }
 
+    @Transactional
     public <T> T commonFind(Class<T> type, long id) {
         T t = (T) getCurrentSession().get(type, Long.valueOf(id));
         return t;
     }
 
+    @Transactional
     public void commonUpdate(Object obj)
             throws Exception {
         getCurrentSession().update(obj);
     }
 
+    @Transactional
     public <T> List<T> search(String attr, Object value, Class<T> type) {
+
+
         List<T> list = new ArrayList();
         String hql = "from " + type.getSimpleName();
         if (attr != null) {
             hql = hql + " where " + attr + "=:param1";
         }
-        System.out.println("AAAAAAAAAAAAAAAAAAAAAAAaaaa  getCurrentSession" + getCurrentSession());
         Query query = getCurrentSession().createQuery(hql);
         if (attr != null) {
-            query.setString("param1", value.toString());
+            query.setParameter("param1", value.toString());
         }
         list = query.list();
         return list;
     }
 
+    @Transactional
     public <T> List<T> search(Class<T> type, String[] attrNames, Object[] attrValues) {
         List<T> list = new ArrayList();
         StringBuilder hql = new StringBuilder();
@@ -281,6 +294,7 @@ public class CommonServiceImpl
         return list;
     }
 
+    @Transactional
     public <T> JsonResult<T> search(String[] attrNames, Object[] attrValues, Class<T> type, int currentPage, int pageSize, String orderBy, String orderType)
             throws Exception {
         JsonResult<T> json = new JsonResult();
@@ -377,6 +391,7 @@ public class CommonServiceImpl
         return json;
     }
 
+    @Transactional
     public boolean batchDelete(List<?> list)
             throws Exception {
         for (Object obj : list) {
@@ -385,6 +400,7 @@ public class CommonServiceImpl
         return true;
     }
 
+    @Transactional
     public <T> JsonResult<T> searchBean(String attrName, Object attrValue, Class<T> type)
             throws Exception {
         JsonResult<T> json = new JsonResult();
@@ -403,5 +419,9 @@ public class CommonServiceImpl
         json.setResult(list);
 
         return json;
+    }
+
+    private String genColum(String str) {
+        return str.replaceAll("[A-Z]", "_$0").toLowerCase();
     }
 }

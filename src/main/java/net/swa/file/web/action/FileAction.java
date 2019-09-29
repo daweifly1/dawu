@@ -1,5 +1,6 @@
 package net.swa.file.web.action;
 
+import lombok.extern.slf4j.Slf4j;
 import net.swa.file.beans.entity.Attachment;
 import net.swa.system.beans.entity.User;
 import net.swa.system.service.ICommonService;
@@ -8,8 +9,7 @@ import net.swa.util.ConfigUtil;
 import net.swa.util.EncryptTool;
 import net.swa.util.FileUtil;
 import net.swa.util.JsonResult;
-import org.apache.commons.lang.StringUtils;
-import org.apache.log4j.Logger;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Required;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -35,9 +35,9 @@ import java.util.UUID;
 
 @Controller
 @RequestMapping({"/file"})
+@Slf4j
 public class FileAction extends AbstractBaseAction {
     private static final long serialVersionUID = -3566256767528230895L;
-    private final Logger log = Logger.getLogger(FileAction.class);
     private String uploadPath;
     private String gabagePath;
     private String httpPath;

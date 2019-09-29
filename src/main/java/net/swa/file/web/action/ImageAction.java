@@ -1,8 +1,8 @@
 package net.swa.file.web.action;
 
+import lombok.extern.slf4j.Slf4j;
 import net.swa.system.web.action.AbstractBaseAction;
 import net.swa.util.StringUtil;
-import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -20,10 +20,10 @@ import java.util.Random;
 
 @Controller
 @RequestMapping({"/image"})
+@Slf4j
 public class ImageAction
         extends AbstractBaseAction {
     private static final long serialVersionUID = 5333303240193114340L;
-    private Logger logger = Logger.getLogger(getClass());
 
     public static BufferedImage rotateImg(BufferedImage image, int degree, Color bgcolor)
             throws IOException {
@@ -131,7 +131,7 @@ public class ImageAction
         try {
             ImageIO.write(image, "JPEG", response.getOutputStream());
         } catch (Exception e) {
-            this.logger.error(e.getMessage());
+            this.log.error(e.getMessage());
         }
     }
 

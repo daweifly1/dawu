@@ -1,12 +1,13 @@
 package net.swa.util;
 
-import org.apache.commons.lang.StringUtils;
-import org.apache.log4j.Logger;
+import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
+@Slf4j
 public class DateUtils {
     public static final long SECOND = 1000L;
     public static final long MINUTE = 60000L;
@@ -16,7 +17,6 @@ public class DateUtils {
     public static final long MONTH = 2592000000L;
     public static final long YEAR = 31536000000L;
     public static final String YYYY_MM_DD = "yyyy-MM-dd";
-    private static final Logger log = Logger.getLogger(DateUtils.class);
     private static SimpleDateFormat sdf = new SimpleDateFormat();
 
     public static String[] getAvailableMonth(int begin, int end) {

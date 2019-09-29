@@ -4,7 +4,7 @@ import net.swa.system.beans.entity.Menu;
 import net.swa.system.beans.entity.Role;
 import net.swa.system.dao.HibernateDaoSupport;
 import net.swa.system.service.IMenuService;
-import org.hibernate.Query;
+import org.hibernate.query.Query;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;

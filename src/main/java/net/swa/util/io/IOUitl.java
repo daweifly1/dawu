@@ -1,14 +1,14 @@
 package net.swa.util.io;
 
-import org.apache.log4j.Level;
-import org.apache.log4j.Logger;
+import lombok.extern.slf4j.Slf4j;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
+@Slf4j
 public class IOUitl {
-    private static final Logger log = Logger.getLogger(IOUitl.class);
+
 
     /* Error */
     public static void copy(String srcFileName, String destFileName, boolean replace)
@@ -128,9 +128,9 @@ public class IOUitl {
                 input.close();
                 input = null;
             } catch (IOException ex) {
-                if (log.isEnabledFor(Level.WARN)) {
-                    log.warn("关闭文件输入流异常：", ex);
-                }
+
+                log.warn("关闭文件输入流异常：", ex);
+
             }
         }
     }
@@ -141,9 +141,9 @@ public class IOUitl {
                 output.close();
                 output = null;
             } catch (IOException ex) {
-                if (log.isEnabledFor(Level.WARN)) {
-                    log.warn("关闭文件输出流异常：", ex);
-                }
+
+                log.warn("关闭文件输出流异常：", ex);
+
             }
         }
     }
