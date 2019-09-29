@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--该日志将日志级别不同的log信息保存到不同的文件中 -->
+<configuration>
+    <include resource="org/springframework/boot/logging/logback/defaults.xml"/>
+
+    <springProperty scope="context" name="springAppName"
+                    source="spring.application.name"/>
+
+    <!-- 日志在工程中的输出位置 -->
+    <property name="LOG_FILE" value="${LOG_FILE:-${LOG_PATH:-${LOG_TEMP:-./logs}}/${springAppName}.log}"/>
+    <!--<property name="LOG_FILE" value="${BUILD_FOLDER:-build}/${springAppName}.log" />-->
+
+    <!-- 控制台的日志输出样式 -->
+    <property name="CONSOLE_LOG_PATTERN"
+              value="${CONSOLE_LOG_PATTERN:-%clr(%d{yyyy-MM-dd HH:mm:ss.SSS}){faint} %clr(${LOG_LEVEL_PATTERN:-%5p}) %clr(${PID:- }){magenta} %clr(---){faint} %clr([%15.15t]){faint} %clr(%-40.40logger{39}){cyan} %clr(:){faint} %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}}"/>
+
+    <logger name="net.swa" level="DEBUG"/>
+    <!-- Turn off third party chatter -->
+    <logger name="org.apache.http" level="INFO"/>
+    <logger name="org.springframework" level="INFO"/>
+    <logger name="com.netflix.discovery" level="INFO"/>
+    <logger name="druid.sql" level="INFO"/>
+    <logger name="org.xnio" level="INFO"/>
+    <logger name="io.undertow.request.security" level="INFO"/>
+    <logger name="com.netflix.loadbalancer" level="INFO"/>
+    <logger name="org.hibernate.validator" level="INFO"/>
+    <logger name="springfox.documentation" level="INFO"/>
+    <logger name="io.lettuce.core" level="INFO"/>
+    <logger name="com.zaxxer.hikari.pool" level="INFO"/>
+    <logger name="io.netty" level="INFO"/>
+
+    <!-- 控制台输出 -->
+    <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>DEBUG</level>
+        </filter>
+        <!-- 日志输出编码 -->
+        <encoder>
+            <pattern>${CONSOLE_LOG_PATTERN}</pattern>
+            <!--<pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{50} - %msg%n</pattern>-->
+            <charset>utf8</charset>
+        </encoder>
+    </appender>
+    <!--文件-->
+    <appender name="rollingFile" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_FILE}</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <!--日志文件输出的文件名 -->
+            <fileNamePattern>${LOG_FILE}.%d{yyyy-MM-dd}.%i.gz</fileNamePattern>
+            <!--日志文件保留天数 -->
+            <MaxHistory>3</MaxHistory>
+            <MaxFileSize>10MB</MaxFileSize>
+        </rollingPolicy>
+        <encoder>
+            <pattern>%d{yyyy-MM-dd} %d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+            <charset>utf-8</charset>
+        </encoder>
+    </appender>
+    <!-- 异步输出 -->
+    <appender name="asyncFile" class="ch.qos.logback.classic.AsyncAppender">
+        <!-- 不丢失日志.默认的,如果队列的80%已满,则会丢弃TRACT、DEBUG、INFO级别的日志 -->
+        <discardingThreshold>0</discardingThreshold>
+        <!-- 更改默认的队列的深度,该值会影响性能.默认值为256 -->
+        <queueSize>512</queueSize>
+        <!-- 添加附加的appender,最多只能添加一个 -->
+        <appender-ref ref="rollingFile"/>
+    </appender>
+    <!-- 为logstash输出的JSON格式的Appender -->
+    <!--<appender name="logstash"-->
+    <!--class="net.logstash.logback.appender.LogstashTcpSocketAppender">-->
+    <!--<destination>192.168.226.133:9250</destination>-->
+    <!--&lt;!&ndash; 日志输出编码 &ndash;&gt;-->
+    <!--<encoder-->
+    <!--class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">-->
+    <!--<providers>-->
+    <!--<timestamp>-->
+    <!--<timeZone>UTC</timeZone>-->
+    <!--</timestamp>-->
+    <!--<pattern>-->
+    <!--<pattern>-->
+    <!--{-->
+    <!--"severity": "%level",-->
+    <!--"service": "${springAppName:-}",-->
+    <!--"trace": "%X{X-B3-TraceId:-}",-->
+    <!--"span": "%X{X-B3-SpanId:-}",-->
+    <!--"exportable": "%X{X-Span-Export:-}",-->
+    <!--"pid": "${PID:-}",-->
+    <!--"thread": "%thread",-->
+    <!--"class": "%logger{40}",-->
+    <!--"rest": "%notification"-->
+    <!--}-->
+    <!--</pattern>-->
+    <!--</pattern>-->
+    <!--</providers>-->
+    <!--</encoder>-->
+    <!--</appender>-->
+
+    <!-- 日志输出级别 -->
+    <root level="INFO">
+        <appender-ref ref="console"/>
+        <appender-ref ref="asyncFile"/>
+        <!--<appender-ref ref="logstash" />-->
+    </root>
+    <jmxConfigurator/>
+</configuration>
