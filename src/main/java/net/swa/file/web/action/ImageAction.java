@@ -1,7 +1,7 @@
 package net.swa.file.web.action;
 
 import lombok.extern.slf4j.Slf4j;
-import net.swa.system.web.action.AbstractBaseAction;
+import net.swa.system.web.controller.AbstractBaseController;
 import net.swa.util.StringUtil;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,7 +22,7 @@ import java.util.Random;
 @RequestMapping({"/image"})
 @Slf4j
 public class ImageAction
-        extends AbstractBaseAction {
+        extends AbstractBaseController {
     private static final long serialVersionUID = 5333303240193114340L;
 
     public static BufferedImage rotateImg(BufferedImage image, int degree, Color bgcolor)

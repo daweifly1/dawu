@@ -3,7 +3,7 @@ package net.swa.index.web.action;
 import lombok.extern.slf4j.Slf4j;
 import net.swa.index.beans.entity.ApkVersion;
 import net.swa.index.service.ApkVersionService;
-import net.swa.system.web.action.AbstractBaseAction;
+import net.swa.system.web.controller.AbstractBaseController;
 import org.springframework.beans.factory.annotation.Required;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -19,7 +19,7 @@ import java.util.Map;
 @RequestMapping({"/version"})
 @Slf4j
 public class ApkVersionAction
-        extends AbstractBaseAction {
+        extends AbstractBaseController {
     private static final long serialVersionUID = -1541842392065452147L;
     private ApkVersionService apkVersionService;
 

@@ -4,7 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import net.swa.file.beans.entity.Attachment;
 import net.swa.system.beans.entity.User;
 import net.swa.system.service.ICommonService;
-import net.swa.system.web.action.AbstractBaseAction;
+import net.swa.system.web.controller.AbstractBaseController;
 import net.swa.util.ConfigUtil;
 import net.swa.util.EncryptTool;
 import net.swa.util.FileUtil;
@@ -36,7 +36,7 @@ import java.util.UUID;
 @Controller
 @RequestMapping({"/file"})
 @Slf4j
-public class FileAction extends AbstractBaseAction {
+public class FileAction extends AbstractBaseController {
     private static final long serialVersionUID = -3566256767528230895L;
     private String uploadPath;
     private String gabagePath;

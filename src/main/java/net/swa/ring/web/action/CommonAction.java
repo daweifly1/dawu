@@ -1,7 +1,7 @@
 package net.swa.ring.web.action;
 
 import net.swa.system.service.ICommonService;
-import net.swa.system.web.action.AbstractBaseAction;
+import net.swa.system.web.controller.AbstractBaseController;
 import net.swa.util.JsonResult;
 import org.springframework.beans.factory.annotation.Required;
 import org.springframework.stereotype.Controller;
@@ -16,7 +16,7 @@ import java.util.List;
 @Controller
 @RequestMapping({"/comm"})
 public class CommonAction
-        extends AbstractBaseAction {
+        extends AbstractBaseController {
     private static final long serialVersionUID = 523073008569799989L;
     private ICommonService commonService;
 

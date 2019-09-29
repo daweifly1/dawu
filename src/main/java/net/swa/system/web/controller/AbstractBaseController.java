@@ -1,4 +1,4 @@
-package net.swa.system.web.action;
+package net.swa.system.web.controller;
 
 
 import net.swa.util.JsonResult;
@@ -6,7 +6,7 @@ import net.swa.util.fastjson.FastJsonUtil;
 
 import javax.servlet.http.HttpServletResponse;
 
-public abstract class AbstractBaseAction {
+public abstract class AbstractBaseController {
     protected void outError(String msg, HttpServletResponse response)
             throws Exception {
         JsonResult<Object> json = new JsonResult();

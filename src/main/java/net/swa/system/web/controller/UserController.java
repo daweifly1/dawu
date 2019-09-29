@@ -1,4 +1,4 @@
-package net.swa.system.web.action;
+package net.swa.system.web.controller;
 
 import net.swa.system.beans.entity.Dict;
 import net.swa.system.beans.entity.Role;
@@ -6,8 +6,6 @@ import net.swa.system.beans.entity.User;
 import net.swa.system.service.ICommonService;
 import net.swa.util.DateUtils;
 import net.swa.util.EncryptTool;
-import net.swa.util.HtmlUtil;
-import net.swa.util.StringUtil;
 import org.springframework.beans.factory.annotation.Required;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -21,21 +19,20 @@ import java.util.List;
 
 @Controller
 @RequestMapping({"/user"})
-public class UserAction
-        extends AbstractBaseAction {
+public class UserController extends AbstractBaseController {
     private static final long serialVersionUID = 8631793382515907988L;
     private ICommonService commonService;
 
-    public static void main(String[] args) {
-        User user = new User();
-        user.setPassword(StringUtil.getRandomString(6));
-        try {
-            String html = HtmlUtil.parseHtmlFile("net/swa/util/templete.html", user);
-            System.out.println(html);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
+//    public static void main(String[] args) {
+//        User user = new User();
+//        user.setPassword(StringUtil.getRandomString(6));
+//        try {
+//            String html = HtmlUtil.parseHtmlFile("net/swa/util/templete.html", user);
+//            System.out.println(html);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//    }
 
     @RequestMapping({"/listPage"})
     public String listPage()

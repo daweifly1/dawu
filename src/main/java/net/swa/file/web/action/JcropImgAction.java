@@ -3,7 +3,7 @@ package net.swa.file.web.action;
 import lombok.extern.slf4j.Slf4j;
 import net.swa.file.beans.entity.Attachment;
 import net.swa.system.service.ICommonService;
-import net.swa.system.web.action.AbstractBaseAction;
+import net.swa.system.web.controller.AbstractBaseController;
 import net.swa.util.ConfigUtil;
 import net.swa.util.FileUtil;
 import net.swa.util.JsonResult;
@@ -29,7 +29,7 @@ import java.util.UUID;
 @Controller
 @RequestMapping({"/jcrop"})
 public class JcropImgAction
-        extends AbstractBaseAction {
+        extends AbstractBaseController {
     private static final long serialVersionUID = -3566256767528230895L;
     private ICommonService commonService;
     private String uploadPath;
@@ -115,7 +115,7 @@ public class JcropImgAction
             throws Exception {
         // Byte code:
         //   0: aload_0
-        //   1: getfield 29	net/swa/file/web/action/JcropImgAction:log	Lorg/apache/log4j/Logger;
+        //   1: getfield 29	net/swa/file/web/controller/JcropImgAction:log	Lorg/apache/log4j/Logger;
         //   4: ldc_w 261
         //   7: invokevirtual 61	org/apache/log4j/Logger:debug	(Ljava/lang/Object;)V
         //   10: new 91	net/swa/util/JsonResult
@@ -148,9 +148,9 @@ public class JcropImgAction
         //   70: ldc -123
         //   72: invokevirtual 280	java/lang/String:replace	(Ljava/lang/CharSequence;Ljava/lang/CharSequence;)Ljava/lang/String;
         //   75: aload_0
-        //   76: getfield 38	net/swa/file/web/action/JcropImgAction:uploadPath	Ljava/lang/String;
+        //   76: getfield 38	net/swa/file/web/controller/JcropImgAction:uploadPath	Ljava/lang/String;
         //   79: aload_0
-        //   80: getfield 44	net/swa/file/web/action/JcropImgAction:httpPath	Ljava/lang/String;
+        //   80: getfield 44	net/swa/file/web/controller/JcropImgAction:httpPath	Ljava/lang/String;
         //   83: invokevirtual 280	java/lang/String:replace	(Ljava/lang/CharSequence;Ljava/lang/CharSequence;)Ljava/lang/String;
         //   86: astore 15
         //   88: new 104	java/io/File
@@ -191,7 +191,7 @@ public class JcropImgAction
         //   167: astore 20
         //   169: aload_0
         //   170: aload 12
-        //   172: invokespecial 297	net/swa/file/web/action/JcropImgAction:getImgType	(Ljava/lang/String;)Ljava/lang/String;
+        //   172: invokespecial 297	net/swa/file/web/controller/JcropImgAction:getImgType	(Ljava/lang/String;)Ljava/lang/String;
         //   175: astore 21
         //   177: aload 21
         //   179: invokestatic 300	javax/imageio/ImageIO:getImageReadersByFormatName	(Ljava/lang/String;)Ljava/util/Iterator;
@@ -310,7 +310,7 @@ public class JcropImgAction
         //   415: invokeinterface 367 1 0
         //   420: goto +27 -> 447
         //   423: aload_0
-        //   424: getfield 29	net/swa/file/web/action/JcropImgAction:log	Lorg/apache/log4j/Logger;
+        //   424: getfield 29	net/swa/file/web/controller/JcropImgAction:log	Lorg/apache/log4j/Logger;
         //   427: ldc_w 370
         //   430: invokevirtual 61	org/apache/log4j/Logger:debug	(Ljava/lang/Object;)V
         //   433: aload 11
@@ -322,7 +322,7 @@ public class JcropImgAction
         //   447: aload_0
         //   448: aload 11
         //   450: aload 10
-        //   452: invokevirtual 218	net/swa/file/web/action/JcropImgAction:outJson	(Ljava/lang/Object;Ljavax/servlet/http/HttpServletResponse;)V
+        //   452: invokevirtual 218	net/swa/file/web/controller/JcropImgAction:outJson	(Ljava/lang/Object;Ljavax/servlet/http/HttpServletResponse;)V
         //   455: return
         // Line number table:
         //   Java source line #173	-> byte code offset #0

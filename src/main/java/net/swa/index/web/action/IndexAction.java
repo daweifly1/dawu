@@ -5,7 +5,7 @@ import net.swa.index.beans.entity.GymLog;
 import net.swa.index.beans.entity.Members;
 import net.swa.index.service.ApkVersionService;
 import net.swa.index.service.IndexService;
-import net.swa.system.web.action.AbstractBaseAction;
+import net.swa.system.web.controller.AbstractBaseController;
 import net.swa.util.DateUtils;
 import net.swa.util.EncryptTool;
 import org.apache.commons.lang3.StringUtils;
@@ -23,7 +23,7 @@ import java.util.Map;
 @Controller
 @RequestMapping({"/index"})
 public class IndexAction
-        extends AbstractBaseAction {
+        extends AbstractBaseController {
     private IndexService indexService;
     private ApkVersionService apkVersionService;
 

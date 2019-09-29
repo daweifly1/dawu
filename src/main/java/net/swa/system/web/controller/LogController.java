@@ -1,4 +1,4 @@
-package net.swa.system.web.action;
+package net.swa.system.web.controller;
 
 import net.swa.system.beans.entity.User;
 import net.swa.system.service.ICommonService;
@@ -13,8 +13,7 @@ import javax.servlet.http.HttpSession;
 
 @Controller
 @RequestMapping({"/log"})
-public class LogAction
-        extends AbstractBaseAction {
+public class LogController extends AbstractBaseController {
     private static final long serialVersionUID = -8971852540641555704L;
     private ICommonService commonService;
 

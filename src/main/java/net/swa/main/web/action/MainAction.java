@@ -5,7 +5,7 @@ import net.swa.system.beans.entity.Menu;
 import net.swa.system.beans.entity.User;
 import net.swa.system.service.ICommonService;
 import net.swa.system.service.IMenuService;
-import net.swa.system.web.action.AbstractBaseAction;
+import net.swa.system.web.controller.AbstractBaseController;
 import net.swa.util.EncryptTool;
 import net.swa.util.JsonResult;
 import org.springframework.beans.factory.annotation.Required;
@@ -25,7 +25,7 @@ import java.util.Map;
 @Slf4j
 @Controller
 public class MainAction
-        extends AbstractBaseAction {
+        extends AbstractBaseController {
     private static final long serialVersionUID = -8445520563685861470L;
     private ICommonService commonService;
     private IMenuService menuService;

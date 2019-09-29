@@ -1,7 +1,7 @@
 package net.swa.index.web.action;
 
 import lombok.extern.slf4j.Slf4j;
-import net.swa.system.web.action.AbstractBaseAction;
+import net.swa.system.web.controller.AbstractBaseController;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -11,7 +11,7 @@ import java.net.URLEncoder;
 
 @Slf4j
 public abstract class AbstractBaseIndexAction
-        extends AbstractBaseAction {
+        extends AbstractBaseController {
     private static final long serialVersionUID = 3625388438776145908L;
 
     protected void addCookie(HttpServletResponse resp, String name, String value) {

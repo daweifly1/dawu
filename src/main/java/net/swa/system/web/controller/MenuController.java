@@ -1,4 +1,4 @@
-package net.swa.system.web.action;
+package net.swa.system.web.controller;
 
 import net.swa.system.beans.entity.Menu;
 import net.swa.system.service.ICommonService;
@@ -17,8 +17,7 @@ import java.util.List;
 
 @Controller
 @RequestMapping({"/menu"})
-public class MenuAction
-        extends AbstractBaseAction {
+public class MenuController extends AbstractBaseController {
     private static final long serialVersionUID = -3395155013072080770L;
     private ICommonService commonService;
     private IMenuService menuService;

@@ -1,4 +1,4 @@
-package net.swa.system.web.action;
+package net.swa.system.web.controller;
 
 import net.swa.system.beans.entity.Menu;
 import net.swa.system.beans.entity.Role;
@@ -17,8 +17,7 @@ import java.util.List;
 
 @Controller
 @RequestMapping({"/role"})
-public class RoleAction
-        extends AbstractBaseAction {
+public class RoleController extends AbstractBaseController {
     private static final long serialVersionUID = 6771957130989908200L;
     private ICommonService commonService;
 

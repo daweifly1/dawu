@@ -1,26 +1,26 @@
-package net.swa.system.web.action;
+package net.swa.system.web.controller;
 
 import net.swa.system.beans.entity.Dict;
 import net.swa.system.service.ICommonService;
 import net.swa.system.service.IDictService;
 import net.swa.util.JsonResult;
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.beans.factory.annotation.Required;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 @Controller
 @RequestMapping({"/dict"})
-public class DictAction
-        extends AbstractBaseAction {
+public class DictController extends AbstractBaseController {
     private static final long serialVersionUID = -985277678565361630L;
+    @Autowired
     private ICommonService commonService;
+    @Autowired
     private IDictService dictService;
 
     @RequestMapping({"/listPage"})
@@ -115,15 +115,4 @@ public class DictAction
         outJson(json, rsp);
     }
 
-    @Resource
-    @Required
-    public void setCommonService(ICommonService commonService) {
-        this.commonService = commonService;
-    }
-
-    @Resource
-    @Required
-    public void setDictService(IDictService dictService) {
-        this.dictService = dictService;
-    }
 }
