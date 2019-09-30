@@ -12,7 +12,7 @@
 	<div class='content'>
 		<form id="menuSearchForm" method="post">
 			<input type="hidden" name="pageSize" value="15">
-			<input type="hidden" name="type" value='net.swa.system.beans.entity.Menu' />
+			<input type="hidden" name="type" value='top.chendawei.system.beans.entity.Menu' />
 			<input type="hidden" name="attrNames" value='title' />
 			<div class="buttonPanel">
 				<label>

@@ -1,7 +1,7 @@
 ﻿<%@ page pageEncoding="UTF-8"%>
 <form id="roleSearchForm" method="post" onsubmit="return false">
 	<input type="hidden" name="pageSize" value="15">
-	<input type="hidden" name="type" value='net.swa.system.beans.entity.Role' />
+	<input type="hidden" name="type" value='top.chendawei.system.beans.entity.Role' />
 	<input type="hidden" name="attrNames" value='name' />
 	<div class="SearchPanel">
 			角色名

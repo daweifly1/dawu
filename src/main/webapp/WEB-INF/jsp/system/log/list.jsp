@@ -2,7 +2,7 @@
 <form id="logSearchForm" method="post">
 	<input type="hidden" name="pageSize" value="15">
 	<input type="hidden" name="type"
-		value='net.swa.system.beans.entity.OperationLog' />
+		value='top.chendawei.system.beans.entity.OperationLog' />
 	<input type="hidden" name="attrNames" value='userid' />
 	<input type="hidden" name="userid_operator" value='=' />
 	<input type="hidden" name="attrNames" value='status' />

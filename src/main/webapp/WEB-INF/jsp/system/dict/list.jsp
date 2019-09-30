@@ -1,7 +1,7 @@
 ﻿<%@ page pageEncoding="UTF-8"%>
 <form id="dictSearchForm" method="post" onsubmit="return false">
 	<input type="hidden" name="pageSize" value="100">
-	<input type="hidden" name="type" value='net.swa.system.beans.entity.Dict' />
+	<input type="hidden" name="type" value='top.chendawei.system.beans.entity.Dict' />
 	<input type="hidden" name="attrNames" value='title' />
 	<input type="hidden" name="title_operator" value='=' />
 	<div class='content'>

@@ -8,7 +8,7 @@
 	<uri>/file</uri>
 	<tag>
 		<name>upload</name>
-		<tag-class>net.swa.file.web.tag.FileTag</tag-class>
+		<tag-class>top.chendawei.file.web.tag.FileTag</tag-class>
 		<body-content>empty</body-content>
 		<attribute>
 			<name>name</name>
@@ -70,7 +70,7 @@
 
 	<tag>
 		<name>image</name>
-		<tag-class>net.swa.file.web.tag.ImageTag</tag-class>
+		<tag-class>top.chendawei.file.web.tag.ImageTag</tag-class>
 		<body-content>empty</body-content>
 		<attribute>
 			<name>name</name>
@@ -137,7 +137,7 @@
 
 	<tag>
 		<name>oneJcrop</name>
-		<tag-class>net.swa.file.web.tag.SingleJcropTag</tag-class>
+		<tag-class>top.chendawei.file.web.tag.SingleJcropTag</tag-class>
 		<body-content>empty</body-content>
 		<attribute>
 			<name>name</name>
@@ -189,7 +189,7 @@
 	
 	<tag>
 		<name>multiJcrop</name>
-		<tag-class>net.swa.file.web.tag.MultiJcropTag</tag-class>
+		<tag-class>top.chendawei.file.web.tag.MultiJcropTag</tag-class>
 		<body-content>empty</body-content>
 		<attribute>
 			<name>name</name>

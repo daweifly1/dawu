@@ -12,7 +12,7 @@
 		</table>
 		<div class='content'>
 			<input type="hidden" name="pageSize" value="15">
-			<input type="hidden" name="type" value='net.swa.system.beans.entity.User' />
+			<input type="hidden" name="type" value='top.chendawei.system.beans.entity.User' />
 			<input type="hidden" name="attrNames" value='realName' />
 			<div class="buttonPanel">
 				<label>

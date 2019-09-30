@@ -8,7 +8,7 @@
 	<uri>/script-tag</uri>
 	<tag>
 		<name>inport</name>
-		<tag-class>net.swa.system.web.tag.ScriptTag</tag-class>
+		<tag-class>top.chendawei.system.web.tag.ScriptTag</tag-class>
 		<body-content>empty</body-content>
 		<attribute>
 			<name>folder</name>
