@@ -1,23 +1,29 @@
 package top.chendawei.ring.web.action;
 
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
 import top.chendawei.system.service.ICommonService;
 import top.chendawei.system.web.controller.AbstractBaseController;
 import top.chendawei.util.JsonResult;
-import org.springframework.beans.factory.annotation.Required;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
 
-import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.lang.reflect.Field;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+
+@Slf4j
 @Controller
 @RequestMapping({"/comm"})
-public class CommonAction
-        extends AbstractBaseController {
+public class CommonAction extends AbstractBaseController {
     private static final long serialVersionUID = 523073008569799989L;
+
+    @Autowired
     private ICommonService commonService;
 
     @RequestMapping({"/updateStatus"})
@@ -30,13 +36,13 @@ public class CommonAction
     }
 
     @RequestMapping({"/delete"})
-    public void delete(String type, Long[] ids, HttpServletRequest request, HttpServletResponse response)
+    public void delete(String type, Long[] ids, HttpServletResponse response)
             throws Exception {
         JsonResult<String> json = new JsonResult();
         try {
             this.commonService.commonDelete(type, ids);
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error("", e);
             json.setSuccess(false);
             json.setMessage(e.getMessage());
         }
@@ -54,7 +60,7 @@ public class CommonAction
         }
         currentPage = Integer.valueOf(currentPage.intValue() == 0 ? 1 : currentPage.intValue());
         pageSize = Integer.valueOf(pageSize.intValue() == 0 ? 20 : pageSize.intValue());
-        List<String> attrValues = null;
+        List<Object> attrValues = null;
         List<String> operators = null;
         String[] attrNames = request.getParameterValues("attrNames");
         if (attrNames == null) {
@@ -63,29 +69,60 @@ public class CommonAction
         List<String> paramName = new ArrayList();
         attrValues = new ArrayList();
         operators = new ArrayList();
+        Class<?> cLz = Class.forName(type);
+        Map<String, Field> fieldMap = new HashMap<String, Field>();
+        Field[] fields = cLz.getDeclaredFields();
+        for (Field f : fields) {
+            fieldMap.put(f.getName(), f);
+        }
+
+
         for (int i = 0; i < attrNames.length; i++) {
             String[] value = request.getParameterValues(attrNames[i]);
             if (!paramName.contains(attrNames[i])) {
+                Field f = fieldMap.get(attrNames[i]);
+                if (null == f) {
+                    continue;
+                }
                 if (value != null) {
                     if (value.length > 1) {
                         String[] opers = request.getParameterValues(attrNames[i] + "_operator");
                         for (int j = 0; j < value.length; j++) {
-                            attrValues.add(value[j]);
+                            if (f.getType().toString().contains("String")) {
+                                attrValues.add(value[j]);
+                            } else if (f.getType().toString().toLowerCase().contains("long")) {
+                                attrValues.add(Long.parseLong(value[j]));
+                            } else if (f.getType().toString().toLowerCase().contains("int")) {
+                                attrValues.add(Integer.parseInt(value[j]));
+                            } else if (f.getType().toString().toLowerCase().contains("short")) {
+                                attrValues.add(Short.parseShort(value[j]));
+                            } else if (f.getType().toString().toLowerCase().contains("bool")) {
+                                attrValues.add(Boolean.parseBoolean(value[j]));
+                            }
                             paramName.add(attrNames[i]);
                             operators.add(opers[j]);
                         }
                     } else if (value.length == 1) {
                         paramName.add(attrNames[i]);
-                        attrValues.add(value[0]);
+                        if (f.getType().toString().contains("String")) {
+                            attrValues.add(value[0]);
+                        } else if (f.getType().toString().toLowerCase().contains("long")) {
+                            attrValues.add(Long.parseLong(value[0]));
+                        } else if (f.getType().toString().toLowerCase().contains("int")) {
+                            attrValues.add(Integer.parseInt(value[0]));
+                        } else if (f.getType().toString().toLowerCase().contains("short")) {
+                            attrValues.add(Short.parseShort(value[0]));
+                        } else if (f.getType().toString().toLowerCase().contains("bool")) {
+                            attrValues.add(Boolean.parseBoolean(value[0]));
+                        }
                         operators.add(request.getParameter(attrNames[i] + "_operator"));
                     }
                 }
             }
         }
-        Class<?> cLz = Class.forName(type);
         String[] searchAttr = new String[paramName.size()];
         paramName.toArray(searchAttr);
-        String[] searchVal = new String[paramName.size()];
+        Object[] searchVal = new Object[paramName.size()];
         attrValues.toArray(searchVal);
         String[] searchOper = new String[paramName.size()];
         operators.toArray(searchOper);
@@ -95,13 +132,4 @@ public class CommonAction
         outJson(json, response);
     }
 
-    public ICommonService getCommonService() {
-        return this.commonService;
-    }
-
-    @Resource
-    @Required
-    public void setCommonService(ICommonService commonService) {
-        this.commonService = commonService;
-    }
 }

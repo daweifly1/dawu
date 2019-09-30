@@ -1,15 +1,14 @@
 package top.chendawei.system.web.controller;
 
-import top.chendawei.system.beans.entity.Menu;
-import top.chendawei.system.beans.entity.Role;
-import top.chendawei.system.service.ICommonService;
-import org.springframework.beans.factory.annotation.Required;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
+import top.chendawei.system.beans.entity.Menu;
+import top.chendawei.system.beans.entity.Role;
+import top.chendawei.system.service.ICommonService;
 
-import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
@@ -19,11 +18,11 @@ import java.util.List;
 @RequestMapping({"/role"})
 public class RoleController extends AbstractBaseController {
     private static final long serialVersionUID = 6771957130989908200L;
+    @Autowired
     private ICommonService commonService;
 
     @RequestMapping({"/listPage"})
-    public String listPage()
-            throws Exception {
+    public String listPage() {
         return "system/role/list";
     }
 
@@ -83,11 +82,5 @@ public class RoleController extends AbstractBaseController {
             this.commonService.commonUpdate(role);
         }
         outSuccess(rsp);
-    }
-
-    @Required
-    @Resource
-    public void setCommonService(ICommonService commonService) {
-        this.commonService = commonService;
     }
 }

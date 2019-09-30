@@ -28,15 +28,14 @@ import java.util.UUID;
 @Slf4j
 @Controller
 @RequestMapping({"/jcrop"})
-public class JcropImgAction
-        extends AbstractBaseController {
+public class JcropImgFileController extends AbstractBaseController {
     private static final long serialVersionUID = -3566256767528230895L;
     private ICommonService commonService;
     private String uploadPath;
     private String gabagePath;
     private String httpPath;
 
-    public JcropImgAction() {
+    public JcropImgFileController() {
         this.uploadPath = ConfigUtil.getProperty("uploadPath");
         this.gabagePath = ConfigUtil.getProperty("gabagePath");
         this.httpPath = ConfigUtil.getProperty("httpPath");

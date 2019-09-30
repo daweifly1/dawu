@@ -51,8 +51,8 @@ public class DictServiceImpl
             if (ids[i] != null) {
                 Dict d = (Dict) session.get(Dict.class, ids[i]);
                 if (d != null) {
-                    query.setString("pinPai", d.getKey());
-                    query.setString("xingHao", d.getKey());
+                    query.setParameter("pinPai", d.getKey());
+                    query.setParameter("xingHao", d.getKey());
                     List l = query.list();
                     if ((l != null) && (l.size() > 0)) {
                         json.setMessage("字典数据正在使用不可以删除");

@@ -14,6 +14,7 @@
 			<input type="hidden" name="pageSize" value="15">
 			<input type="hidden" name="type" value='top.chendawei.system.beans.entity.User' />
 			<input type="hidden" name="attrNames" value='realName' />
+			<input type="hidden" name="realName_operator" value='like' />
 			<div class="buttonPanel">
 				<label>
 					姓名

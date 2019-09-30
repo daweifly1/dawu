@@ -24,7 +24,7 @@ import java.util.Map;
 
 @Slf4j
 @Controller
-public class MainAction extends AbstractBaseController {
+public class MainController extends AbstractBaseController {
     private static final long serialVersionUID = -8445520563685861470L;
     private ICommonService commonService;
     private IMenuService menuService;

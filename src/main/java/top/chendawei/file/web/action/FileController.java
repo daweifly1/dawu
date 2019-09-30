@@ -36,14 +36,14 @@ import java.util.UUID;
 @Controller
 @RequestMapping({"/file"})
 @Slf4j
-public class FileAction extends AbstractBaseController {
+public class FileController extends AbstractBaseController {
     private static final long serialVersionUID = -3566256767528230895L;
     private String uploadPath;
     private String gabagePath;
     private String httpPath;
     private ICommonService commonService;
 
-    public FileAction() {
+    public FileController() {
         this.uploadPath = ConfigUtil.getProperty("uploadPath");
         this.gabagePath = ConfigUtil.getProperty("gabagePath");
         this.httpPath = ConfigUtil.getProperty("httpPath");

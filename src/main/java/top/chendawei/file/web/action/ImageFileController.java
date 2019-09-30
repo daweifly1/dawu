@@ -1,10 +1,10 @@
 package top.chendawei.file.web.action;
 
 import lombok.extern.slf4j.Slf4j;
-import top.chendawei.system.web.controller.AbstractBaseController;
-import top.chendawei.util.StringUtil;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import top.chendawei.system.web.controller.AbstractBaseController;
+import top.chendawei.util.StringUtil;
 
 import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
@@ -15,18 +15,15 @@ import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
 import java.awt.image.ColorModel;
 import java.awt.image.WritableRaster;
-import java.io.IOException;
 import java.util.Random;
 
 @Controller
 @RequestMapping({"/image"})
 @Slf4j
-public class ImageAction
-        extends AbstractBaseController {
+public class ImageFileController extends AbstractBaseController {
     private static final long serialVersionUID = 5333303240193114340L;
 
-    public static BufferedImage rotateImg(BufferedImage image, int degree, Color bgcolor)
-            throws IOException {
+    public static BufferedImage rotateImg(BufferedImage image, int degree, Color bgcolor) {
         int iw = image.getWidth();
         int ih = image.getHeight();
         int w = 0;

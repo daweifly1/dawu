@@ -1,12 +1,12 @@
 package top.chendawei.system.service.impl;
 
-import top.chendawei.system.dao.HibernateDaoSupport;
-import top.chendawei.system.service.ICommonService;
-import top.chendawei.util.JsonResult;
 import org.apache.commons.lang3.StringUtils;
 import org.hibernate.query.Query;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import top.chendawei.system.dao.HibernateDaoSupport;
+import top.chendawei.system.service.ICommonService;
+import top.chendawei.util.JsonResult;
 
 import javax.persistence.Id;
 import java.lang.reflect.Method;
@@ -18,8 +18,8 @@ public class CommonServiceImpl
         extends HibernateDaoSupport
         implements ICommonService {
     @Transactional
-    public <T> JsonResult<T> search(String[] attrNames, Object[] attrValues, String[] operators, Class<T> type, int currentPage, int pageSize, String orderBy, String orderType)
-            throws Exception {
+    public <T> JsonResult<T> search(String[] attrNames, Object[] attrValues, String[] operators, Class<T> type, int currentPage,
+                                    int pageSize, String orderBy, String orderType) {
         JsonResult<T> json = new JsonResult();
         List<T> list = new ArrayList();
         StringBuilder hql = new StringBuilder();
@@ -28,20 +28,16 @@ public class CommonServiceImpl
             String operator = operators[i];
             if (!StringUtils.isEmpty(operator)) {
                 operator = operator.replace("'", "");
-                String val = attrValues[i] == null ? "" : attrValues[i]
-                        .toString();
+                String val = attrValues[i] == null ? "" : attrValues[i].toString();
                 if (val.indexOf("||") > 0) {
                     String[] vals = val.split("\\|\\|");
                     hql.append(" and (");
                     for (int j = 0; j < vals.length; j++) {
-                        hql.append((j == 0 ? "" : " or ") + attrNames[i] +
-                                operator + " :param" + i + j);
+                        hql.append((j == 0 ? "" : " or ") + attrNames[i] + operator + " :param" + i + j);
                     }
                     hql.append(") ");
-                } else if ((attrValues[i] != null) &&
-                        (!StringUtils.isBlank(attrValues[i].toString()))) {
-                    hql.append(" and " + attrNames[i] + " " + operator +
-                            " :param" + i);
+                } else if ((attrValues[i] != null) && (!StringUtils.isBlank(attrValues[i].toString()))) {
+                    hql.append(" and " + attrNames[i] + " " + operator + " :param" + i);
                 }
             }
         }
@@ -54,15 +50,17 @@ public class CommonServiceImpl
             if (val.indexOf("||") > 0) {
                 String[] vals = val.split("\\|\\|");
                 for (int j = 0; j < vals.length; j++) {
-                    query.setString("param" + i + j, vals[j]);
+                    query.setParameter("param" + i + j, vals[j]);
                 }
-            } else if ((attrValues[i] != null) &&
-                    (!StringUtils.isBlank(attrValues[i].toString()))) {
-                String str = attrValues[i].toString();
+            } else if ((attrValues[i] != null) && (!StringUtils.isBlank(attrValues[i].toString()))) {
+
                 if ("like".equalsIgnoreCase(operators[i])) {
+                    String str = attrValues[i].toString();
                     str = "%" + str.trim() + "%";
+                    query.setParameter("param" + i, str);
+                } else {
+                    query.setParameter("param" + i, attrValues[i]);
                 }
-                query.setString("param" + i, str);
             }
         }
         if (pageSize > 0) {
@@ -78,15 +76,17 @@ public class CommonServiceImpl
             if (val.indexOf("||") > 0) {
                 String[] vals = val.split("\\|\\|");
                 for (int j = 0; j < vals.length; j++) {
-                    query.setString("param" + i + j, vals[j]);
+                    query.setParameter("param" + i + j, vals[j]);
                 }
-            } else if ((attrValues[i] != null) &&
-                    (!StringUtils.isBlank(attrValues[i].toString()))) {
-                String str = attrValues[i].toString();
+            } else if ((attrValues[i] != null) && (!StringUtils.isBlank(attrValues[i].toString()))) {
+
                 if ("like".equalsIgnoreCase(operators[i])) {
+                    String str = attrValues[i].toString();
                     str = "%" + str.trim() + "%";
+                } else {
+                    query.setParameter("param" + i, attrValues[i]);
                 }
-                query.setString("param" + i, str);
+
             }
         }
         if (pageSize > 0) {
@@ -109,7 +109,7 @@ public class CommonServiceImpl
                 .createQuery(
                         "from " + type.getSimpleName() + " where " + attrName +
                                 "=:val");
-        query.setString("val", val.toString());
+        query.setParameter("val", val.toString());
         List<T> list = query.list();
         if (list.size() > 0) {
             return list.get(0);
@@ -136,7 +136,7 @@ public class CommonServiceImpl
         }
         Query query = getCurrentSession().createQuery(hql);
         if ((attr != null) && (value != null)) {
-            query.setString("param1", value.toString());
+            query.setParameter("param1", value.toString());
         }
         if (count != null) {
             query.setMaxResults(count.intValue());
@@ -180,7 +180,7 @@ public class CommonServiceImpl
             Query query = getCurrentSession().createQuery(
                     "update " + type + " set " + stateName +
                             "=:state where id=:id");
-            query.setString("state", status);
+            query.setParameter("state", status);
             query.setLong("id", ids[i].longValue());
             query.executeUpdate();
         }
@@ -276,15 +276,15 @@ public class CommonServiceImpl
                 if (val.indexOf("||") > 0) {
                     String[] vals = val.split("\\|\\|");
                     for (int j = 0; j < vals.length; j++) {
-                        query.setString("param" + i + j, vals[j]);
+                        query.setParameter("param" + i + j, vals[j]);
                     }
                 } else if (("title".equals(attrNames[i])) ||
                         (attrNames[i].contains(".title")) ||
                         ("realName".equals(attrNames[i]))) {
-                    query.setString("param" + i, "%" + attrValues[i] + "%");
+                    query.setParameter("param" + i, "%" + attrValues[i] + "%");
                 } else if (attrValues[i] != null) {
                     if (!StringUtils.isBlank(attrValues[i].toString())) {
-                        query.setString("param" + i,
+                        query.setParameter("param" + i,
                                 attrValues[i].toString());
                     }
                 }
@@ -333,7 +333,7 @@ public class CommonServiceImpl
             if (val.indexOf("||") > 0) {
                 String[] vals = val.split("\\|\\|");
                 for (int j = 0; j < vals.length; j++) {
-                    query.setString("param" + i + j, vals[j]);
+                    query.setParameter("param" + i + j, vals[j]);
                 }
             } else if (("title".equals(attrNames[i])) ||
                     (attrNames[i].contains(".title")) ||
@@ -341,10 +341,10 @@ public class CommonServiceImpl
                     (attrNames[i].contains("address")) ||
                     (attrNames[i].contains("_num")) ||
                     (attrNames[i].contains("_custom"))) {
-                query.setString("param" + i, "%" + attrValues[i] + "%");
+                query.setParameter("param" + i, "%" + attrValues[i] + "%");
             } else if ((attrValues[i] != null) &&
                     (!StringUtils.isBlank(attrValues[i].toString()))) {
-                query.setString("param" + i, attrValues[i].toString());
+                query.setParameter("param" + i, attrValues[i].toString());
             }
         }
         if (pageSize > 0) {
@@ -361,7 +361,7 @@ public class CommonServiceImpl
                 if (val.indexOf("||") > 0) {
                     String[] vals = val.split("\\|\\|");
                     for (int j = 0; j < vals.length; j++) {
-                        query.setString("param" + i + j, vals[j]);
+                        query.setParameter("param" + i + j, vals[j]);
                     }
                 } else if (("title".equals(attrNames[i])) ||
                         (attrNames[i].contains(".title")) ||
@@ -369,10 +369,10 @@ public class CommonServiceImpl
                         (attrNames[i].contains("address")) ||
                         (attrNames[i].contains("_num")) ||
                         (attrNames[i].contains("_custom"))) {
-                    query.setString("param" + i, "%" + attrValues[i] + "%");
+                    query.setParameter("param" + i, "%" + attrValues[i] + "%");
                 } else if (attrValues[i] != null) {
                     if (!StringUtils.isBlank(attrValues[i].toString())) {
-                        query.setString("param" + i,
+                        query.setParameter("param" + i,
                                 attrValues[i].toString());
                     }
                 }
@@ -412,7 +412,7 @@ public class CommonServiceImpl
         }
         Query query = getCurrentSession().createQuery(hql.toString());
         if (attrValue != null) {
-            query.setString("param1", attrValue.toString());
+            query.setParameter("param1", attrValue.toString());
         }
         list = query.list();
 
