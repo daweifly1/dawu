@@ -1,6 +1,7 @@
 package top.chendawei;
 
 import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.context.annotation.Bean;
@@ -13,12 +14,12 @@ public class Start {
         springApplication.run(args);
     }
 
-    @Bean
-    public ServletRegistrationBean servletRegistrationBean(DispatcherServlet dispatcherServlet) {
-        ServletRegistrationBean bean = new ServletRegistrationBean(dispatcherServlet);
-        bean.addUrlMappings("*.do");
-        return bean;
-    }
+//    @Bean
+//    public ServletRegistrationBean servletRegistrationBean(DispatcherServlet dispatcherServlet) {
+//        ServletRegistrationBean bean = new ServletRegistrationBean(dispatcherServlet);
+//        bean.addUrlMappings("*.do");
+//        return bean;
+//    }
 
 
 }
