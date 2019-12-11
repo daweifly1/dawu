@@ -20,11 +20,11 @@ public class WebMvcConfig implements WebMvcConfigurer {
 //        registry.addResourceHandler("/static/**").addResourceLocations("classpath:/static/");
 //    }
 
-    @Override
-    public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(authenticationInterceptor())
-                .addPathPatterns("*.do");    // 拦截所有请求，通过判断是否有 @LoginRequired 注解 决定是否需要登录
-    }
+//    @Override
+//    public void addInterceptors(InterceptorRegistry registry) {
+//        registry.addInterceptor(authenticationInterceptor())
+//                .addPathPatterns("*.do","/");    // 拦截所有请求，通过判断是否有 @LoginRequired 注解 决定是否需要登录
+//    }
 
     @Bean
     public AuthorizeInterceptor authenticationInterceptor() {

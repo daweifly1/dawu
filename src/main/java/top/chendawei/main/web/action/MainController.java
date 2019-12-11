@@ -18,16 +18,23 @@ import top.chendawei.util.http.CookieUtil;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 @Slf4j
-@Controller
+@Controller("/")
 public class MainController extends AbstractBaseController {
     private static final long serialVersionUID = -8445520563685861470L;
     private ICommonService commonService;
     private IMenuService menuService;
+
+
+    @RequestMapping()
+    public void index(HttpServletResponse response) throws IOException {
+        response.sendRedirect("/main.do");
+    }
 
     @RequestMapping({"/main"})
     public ModelAndView main(HttpServletRequest request)
